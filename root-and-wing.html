@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Root & Wing — A Parenting Philosophy</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --soil: #1a1208;
+    --bark: #2d1f0e;
+    --moss: #3d4a2a;
+    --sage: #6b7c52;
+    --wheat: #c4a96b;
+    --parchment: #f0e8d5;
+    --sky: #d4e4f0;
+    --cloud: #f7f3ee;
+    --gold: #c9932a;
+    --rust: #8b4513;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--soil);
+    color: var(--parchment);
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* — HERO — */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 2rem;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 80%, #2d1f0e 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 50% 100%, #3d4a2a22 0%, transparent 60%),
+      linear-gradient(180deg, #0d0a05 0%, #1a1208 40%, #1e160a 100%);
+  }
+
+  /* Tree SVG */
+  .tree-container {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 900px;
+    opacity: 0.18;
+    pointer-events: none;
+  }
+
+  .tree-container svg {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Floating particles */
+  .particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--wheat);
+    border-radius: 50%;
+    opacity: 0;
+    animation: float-up linear infinite;
+  }
+
+  @keyframes float-up {
+    0% { opacity: 0; transform: translateY(0) translateX(0); }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.3; }
+    100% { opacity: 0; transform: translateY(-80vh) translateX(30px); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 700px;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--sage);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fade-in 1s ease 0.3s forwards;
+  }
+
+  .hero-title {
+    font-size: clamp(4rem, 12vw, 8rem);
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fade-in 1s ease 0.6s forwards;
+  }
+
+  .hero-title .root {
+    display: block;
+    color: var(--wheat);
+  }
+
+  .hero-title .amp {
+    display: block;
+    font-style: italic;
+    font-size: 0.4em;
+    color: var(--sage);
+    letter-spacing: 0.1em;
+    margin: 0.3em 0;
+  }
+
+  .hero-title .wing {
+    display: block;
+    color: var(--sky);
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--parchment);
+    opacity: 0.7;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fade-in 1s ease 0.9s forwards;
+  }
+
+  .scroll-cue {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fade-in 1s ease 1.5s forwards;
+  }
+
+  .scroll-cue span {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.25em;
+    color: var(--sage);
+    text-transform: uppercase;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, var(--sage), transparent);
+    animation: grow-line 2s ease 2s infinite;
+  }
+
+  @keyframes grow-line {
+    0%, 100% { transform: scaleY(0); transform-origin: top; opacity: 1; }
+    50% { transform: scaleY(1); opacity: 1; }
+    99% { opacity: 0; }
+  }
+
+  @keyframes fade-in {
+    to { opacity: 1; }
+  }
+
+  /* — PHILOSOPHY INTRO — */
+  .section {
+    padding: 6rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--sage);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--moss);
+    max-width: 80px;
+  }
+
+  .intro-text {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--parchment);
+  }
+
+  .intro-text em {
+    color: var(--wheat);
+    font-style: italic;
+  }
+
+  /* — BEFORE BIRTH — */
+  .before-birth {
+    background: var(--bark);
+    padding: 5rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .before-birth::before {
+    content: '?';
+    position: absolute;
+    right: -2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20rem;
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--moss);
+    opacity: 0.15;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .before-birth-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .decision-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .decision-card {
+    padding: 2rem;
+    border: 1px solid;
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+
+  .decision-card:hover { transform: translateY(-4px); }
+
+  .decision-card.yes {
+    border-color: var(--sage);
+    background: linear-gradient(135deg, #3d4a2a15, transparent);
+  }
+
+  .decision-card.no {
+    border-color: var(--rust);
+    background: linear-gradient(135deg, #8b451315, transparent);
+  }
+
+  .decision-card h3 {
+    font-size: 1.8rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+  }
+
+  .decision-card.yes h3 { color: var(--sage); }
+  .decision-card.no h3 { color: var(--rust); }
+
+  .decision-card p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--parchment);
+    opacity: 0.8;
+  }
+
+  /* — CORE TRUTH — */
+  .core-truth {
+    padding: 6rem 2rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .truth-statement {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: clamp(1.6rem, 4vw, 2.5rem);
+    font-weight: 300;
+    line-height: 1.5;
+    font-style: italic;
+    color: var(--parchment);
+    position: relative;
+    padding: 3rem 0;
+  }
+
+  .truth-statement::before,
+  .truth-statement::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 1px;
+    background: var(--wheat);
+    margin: 0 auto 2rem;
+  }
+
+  .truth-statement::after { margin: 2rem auto 0; }
+
+  .truth-statement strong {
+    color: var(--wheat);
+    font-style: normal;
+  }
+
+  /* — PILLARS — */
+  .pillars-section {
+    background: linear-gradient(180deg, var(--soil) 0%, #0d0a05 100%);
+    padding: 5rem 2rem;
+  }
+
+  .pillars-header {
+    max-width: 900px;
+    margin: 0 auto 4rem;
+  }
+
+  .pillars-header h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 300;
+    color: var(--parchment);
+  }
+
+  .pillar {
+    max-width: 900px;
+    margin: 0 auto 4rem;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 2.5rem;
+    align-items: start;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .pillar.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .pillar-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--sage);
+    padding-top: 0.5rem;
+    text-align: right;
+    border-right: 1px solid var(--moss);
+    padding-right: 2rem;
+  }
+
+  .pillar-content h3 {
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: var(--wheat);
+    margin-bottom: 0.5rem;
+  }
+
+  .pillar-content .pillar-tagline {
+    font-style: italic;
+    color: var(--sage);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+
+  .pillar-content p {
+    font-size: 1rem;
+    line-height: 1.9;
+    color: var(--parchment);
+    opacity: 0.85;
+    margin-bottom: 1rem;
+  }
+
+  .pillar-points {
+    list-style: none;
+    margin-top: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .pillar-points li {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--parchment);
+    opacity: 0.8;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+
+  .pillar-points li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--sage);
+  }
+
+  /* Pillar 0 special */
+  .pillar-zero .pillar-content h3 { color: var(--gold); }
+
+  .pillar-divider {
+    max-width: 900px;
+    margin: 0 auto 4rem;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--moss), transparent);
+  }
+
+  /* — EXIT CONDITION — */
+  .exit-section {
+    padding: 6rem 2rem;
+    background: var(--bark);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .exit-section::after {
+    content: '∞';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30rem;
+    color: var(--moss);
+    opacity: 0.06;
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  .exit-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .exit-quote {
+    font-size: clamp(1.3rem, 3vw, 2rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--parchment);
+    border-left: 2px solid var(--wheat);
+    padding-left: 2rem;
+    margin: 3rem 0;
+  }
+
+  .exit-quote strong { color: var(--sky); font-style: normal; }
+
+  /* — TWO WORDS — */
+  .two-words {
+    padding: 6rem 2rem;
+    text-align: center;
+    background: var(--soil);
+  }
+
+  .two-words-inner {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .word-pair {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin: 3rem 0;
+  }
+
+  .word-root {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 300;
+    color: var(--wheat);
+    line-height: 1;
+  }
+
+  .word-sep {
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--sage), transparent);
+  }
+
+  .word-wing {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 300;
+    color: var(--sky);
+    line-height: 1;
+  }
+
+  .word-definitions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    text-align: left;
+    margin-top: 2rem;
+  }
+
+  .word-def h4 {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+
+  .word-def.root h4 { color: var(--wheat); }
+  .word-def.wing h4 { color: var(--sky); }
+
+  .word-def ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .word-def ul li {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--parchment);
+    opacity: 0.75;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .word-def.root ul li::before { content: '↓'; position: absolute; left: 0; color: var(--wheat); font-size: 0.7rem; }
+  .word-def.wing ul li::before { content: '↑'; position: absolute; left: 0; color: var(--sky); font-size: 0.7rem; }
+
+  /* — FOOTER — */
+  footer {
+    padding: 3rem 2rem;
+    text-align: center;
+    border-top: 1px solid var(--moss);
+  }
+
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--sage);
+    text-transform: uppercase;
+  }
+
+  /* — RESPONSIVE — */
+  @media (max-width: 600px) {
+    .decision-grid { grid-template-columns: 1fr; }
+    .pillar { grid-template-columns: 1fr; }
+    .pillar-number { text-align: left; border-right: none; border-bottom: 1px solid var(--moss); padding-right: 0; padding-bottom: 0.5rem; }
+    .word-pair { gap: 1rem; }
+    .word-definitions { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+
+  <div class="particles" id="particles"></div>
+
+  <div class="tree-container">
+    <svg viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Roots -->
+      <path d="M400 500 Q380 450 340 420 Q300 390 260 400" stroke="#c4a96b" stroke-width="2" fill="none"/>
+      <path d="M400 500 Q390 460 360 440 Q330 420 310 430" stroke="#c4a96b" stroke-width="1.5" fill="none"/>
+      <path d="M400 500 Q410 450 380 420 Q350 390 320 395" stroke="#c4a96b" stroke-width="1" fill="none"/>
+      <path d="M400 500 Q420 455 450 430 Q480 405 510 415" stroke="#c4a96b" stroke-width="2" fill="none"/>
+      <path d="M400 500 Q430 460 470 445 Q510 430 540 440" stroke="#c4a96b" stroke-width="1.5" fill="none"/>
+      <path d="M400 500 Q415 470 440 460 Q465 450 480 455" stroke="#c4a96b" stroke-width="1" fill="none"/>
+      <!-- Trunk -->
+      <path d="M400 500 Q395 400 398 300 Q401 200 400 100" stroke="#c4a96b" stroke-width="3" fill="none"/>
+      <!-- Branches -->
+      <path d="M399 300 Q360 270 320 240 Q280 210 240 220" stroke="#c4a96b" stroke-width="2" fill="none"/>
+      <path d="M399 300 Q440 270 480 240 Q520 210 560 220" stroke="#c4a96b" stroke-width="2" fill="none"/>
+      <path d="M399 220 Q370 190 340 170 Q310 150 290 155" stroke="#c4a96b" stroke-width="1.5" fill="none"/>
+      <path d="M399 220 Q430 190 460 170 Q490 150 510 155" stroke="#c4a96b" stroke-width="1.5" fill="none"/>
+      <path d="M399 160 Q375 130 355 110 Q335 90 330 85" stroke="#c4a96b" stroke-width="1" fill="none"/>
+      <path d="M399 160 Q423 130 443 110 Q463 90 468 85" stroke="#c4a96b" stroke-width="1" fill="none"/>
+      <path d="M399 130 Q399 100 399 70" stroke="#c4a96b" stroke-width="1" fill="none"/>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">A Parenting Philosophy by Koshik</p>
+    <h1 class="hero-title">
+      <span class="root">Root</span>
+      <span class="amp">&</span>
+      <span class="wing">Wing</span>
+    </h1>
+    <p class="hero-subtitle">Give them roots strong enough to know who they are.<br>Give them wings wide enough to go wherever they choose.</p>
+  </div>
+
+  <div class="scroll-cue">
+    <span>Explore</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section style="padding: 6rem 2rem; max-width: 900px; margin: 0 auto;">
+  <div class="section-label">The Foundation</div>
+  <p class="intro-text">
+    A child arrives in this world <em>without asking.</em> That single truth changes everything about what a parent owes, what a child deserves, and what love actually looks like when it is given freely — with no invisible contract attached.
+  </p>
+</section>
+
+<!-- BEFORE BIRTH -->
+<section class="before-birth">
+  <div class="before-birth-inner">
+    <div class="section-label">Before Birth</div>
+    <h2 style="font-size: clamp(2rem, 5vw, 3rem); font-weight: 300; color: var(--parchment); margin-bottom: 1rem;">The First Decision</h2>
+    <p style="font-size: 1rem; line-height: 1.9; opacity: 0.8; max-width: 600px;">Bringing a child into the world is not a right. It is a responsibility that must be met with honest self-assessment — before, not after.</p>
+
+    <div class="decision-grid">
+      <div class="decision-card yes">
+        <h3>Ready to begin</h3>
+        <p>Financial stability exists. Emotional groundedness is present. The relationship between partners is secure. Both people have done honest inner work and are choosing this consciously — not out of social pressure, loneliness, or accident.</p>
+      </div>
+      <div class="decision-card no">
+        <h3>Not yet — and that's courage</h3>
+        <p>Choosing not to have children when conditions are not right is an act of integrity, not failure. A child born into instability carries that instability. Knowing your limits is wisdom, not weakness.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CORE TRUTH -->
+<section class="core-truth">
+  <div class="truth-statement">
+    The child did not ask to be born.<br>
+    Therefore the parent holds <strong>full responsibility</strong> — unconditionally, without keeping score.
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section class="pillars-section">
+  <div class="pillars-header">
+    <div class="section-label">The Five Pillars</div>
+    <h2>How Root & Wing Works</h2>
+  </div>
+
+  <!-- Pillar 0 -->
+  <div class="pillar pillar-zero" id="p0">
+    <div class="pillar-number">00<br><br>prerequisite</div>
+    <div class="pillar-content">
+      <h3>Do the Homework First</h3>
+      <div class="pillar-tagline">The parent must be worked on before the child arrives</div>
+      <p>You cannot give what you never received — unless you consciously go back and heal what was missing. Most parents are unhealed children raising children. The cycle repeats not out of cruelty but out of unawareness.</p>
+      <ul class="pillar-points">
+        <li>Know your own wounds — name them before they name your child's childhood</li>
+        <li>Understand your triggers — your child's failure is not your failure to grieve</li>
+        <li>Study child psychology seriously — development, attachment, discipline that works</li>
+        <li>Examine your unconscious beliefs about what children owe you</li>
+        <li>Make peace with your own parents — unresolved conflict leaks downward</li>
+        <li>A child is not a second chance at your own childhood. Not a project. Not a cure.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="pillar-divider"></div>
+
+  <!-- Pillar 1 -->
+  <div class="pillar" id="p1">
+    <div class="pillar-number">01<br><br>non-negotiable</div>
+    <div class="pillar-content">
+      <h3>The Moral Compass</h3>
+      <div class="pillar-tagline">Build it early. Build it firmly. Never compromise.</div>
+      <p>A child does not arrive knowing good from bad. That is the parent's first and most serious job. Education is not optional — it is the architecture of character. And parents themselves must be educated in how to deliver it.</p>
+      <ul class="pillar-points">
+        <li>Teach what is truly harmful — not what is socially inconvenient</li>
+        <li>Use logic first, always. Fear is a last resort, never a default weapon</li>
+        <li>Correction happens with explanation — not outrage, not humiliation</li>
+        <li>If explanation fails, a change of environment is more powerful than punishment</li>
+        <li>Discipline is rare — surrounded by enough warmth that it lands with weight</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="pillar-divider"></div>
+
+  <!-- Pillar 2 -->
+  <div class="pillar" id="p2">
+    <div class="pillar-number">02<br><br>the method</div>
+    <div class="pillar-content">
+      <h3>Guide Without Controlling</h3>
+      <div class="pillar-tagline">Concern shown in the right spirit is not interference</div>
+      <p>Parents are allowed to worry. They are allowed to speak. But the method matters more than the message. Accusation closes minds. Questions open them.</p>
+      <ul class="pillar-points">
+        <li>Approach with genuine curiosity — why did he make this choice?</li>
+        <li>Ask questions that make the child discover the gap himself</li>
+        <li>Never point out the flaw directly — help them see the bigger picture</li>
+        <li>Once they have thought it through — the decision remains theirs</li>
+        <li>Express concern from wellbeing, never from society's eyes</li>
+        <li>Your unfulfilled dreams are yours. Do not hand them to your child as a roadmap.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="pillar-divider"></div>
+
+  <!-- Pillar 3 -->
+  <div class="pillar" id="p3">
+    <div class="pillar-number">03<br><br>the warmth</div>
+    <div class="pillar-content">
+      <h3>Emotional Intimacy Through Shared Life</h3>
+      <div class="pillar-tagline">Closeness is built in small moments, not grand gestures</div>
+      <p>A child is enthusiastic. He draws, sings, builds things and breaks them, has a hundred stories to tell. The parent's job is to be genuinely present for all of it — not performing interest, but actually showing up.</p>
+      <ul class="pillar-points">
+        <li>Play games together. Take trips. Cook. Watch things. Do ordinary life together.</li>
+        <li>Involve the child in small family decisions — furniture, food, plans</li>
+        <li>Appreciate what he creates — even the small things, especially the small things</li>
+        <li>Make unhurried time — not scheduled quality time, but just time</li>
+        <li>The home should be warm enough that discipline feels like an exception, not the climate</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="pillar-divider"></div>
+
+  <!-- Pillar 4 -->
+  <div class="pillar" id="p4">
+    <div class="pillar-number">04<br><br>the return</div>
+    <div class="pillar-content">
+      <h3>Love Produces Gratitude Naturally</h3>
+      <div class="pillar-tagline">The parent never asks. The child gives because he wants to.</div>
+      <p>Unconditional love does not breed entitlement — it breeds generosity. A child raised without obligation discovers, on his own, that he wants to care for the people who cared for him. Not because he was told to. Because love works that way.</p>
+      <ul class="pillar-points">
+        <li>The parent expects nothing formally — no debts, no contracts</li>
+        <li>Cruelty and ingratitude are moral failures — but they are covered under education</li>
+        <li>Gratitude is taught by example, not demand</li>
+        <li>The child helps, gives company, cares — freely, out of love</li>
+        <li>This is the difference between love and debt</li>
+      </ul>
+    </div>
+  </div>
+
+</section>
+
+<!-- EXIT CONDITION -->
+<section class="exit-section">
+  <div class="exit-inner">
+    <div class="section-label">The Goal</div>
+    <h2 style="font-size: clamp(2rem, 5vw, 3rem); font-weight: 300; color: var(--parchment);">The Exit Condition</h2>
+
+    <div class="exit-quote">
+      A parent's ultimate success is becoming <strong>unnecessary</strong> — raising someone so whole that they do not need you to survive. And then watching them choose to stay anyway, out of love.
+    </div>
+
+    <p style="font-size: 1rem; line-height: 1.9; opacity: 0.8; max-width: 650px;">
+      No invisible contracts. No unpaid debts. No child who stays out of guilt and no parent who withholds love as leverage. Two free people — who happen to be family — choosing each other, again and again, because they genuinely want to.
+    </p>
+  </div>
+</section>
+
+<!-- ROOT AND WING SUMMARY -->
+<section class="two-words">
+  <div class="two-words-inner">
+    <div class="section-label">In Two Words</div>
+
+    <div class="word-pair">
+      <div class="word-root">Root</div>
+      <div class="word-sep"></div>
+      <div class="word-wing">Wing</div>
+    </div>
+
+    <div class="word-definitions">
+      <div class="word-def root">
+        <h4>Root means</h4>
+        <ul>
+          <li>Moral compass</li>
+          <li>Unconditional love</li>
+          <li>Emotional warmth</li>
+          <li>A safe home to return to</li>
+          <li>Identity that holds</li>
+        </ul>
+      </div>
+      <div class="word-def wing">
+        <h4>Wing means</h4>
+        <ul>
+          <li>Freedom of choice</li>
+          <li>Independence as the goal</li>
+          <li>No projection of dreams</li>
+          <li>No invisible debts</li>
+          <li>A life that is theirs alone</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Root & Wing — A Parenting Philosophy &nbsp;·&nbsp; Developed by Koshik &nbsp;·&nbsp; Part of the Solution Series</p>
+</footer>
+
+<script>
+  // Particles
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 25; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.bottom = Math.random() * 30 + '%';
+    p.style.animationDuration = (8 + Math.random() * 12) + 's';
+    p.style.animationDelay = (Math.random() * 10) + 's';
+    p.style.width = p.style.height = (1 + Math.random() * 2) + 'px';
+    container.appendChild(p);
+  }
+
+  // Scroll reveal for pillars
+  const pillars = document.querySelectorAll('.pillar');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  pillars.forEach(p => observer.observe(p));
+</script>
+
+</body>
+</html>

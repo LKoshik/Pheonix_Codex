@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Pheonix Codex — Philosophies of the Self</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=IM+Fell+English:ital@0;1&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --ink: #0a0806;
+    --bark: #0f0c09;
+    --vein: #1e1810;
+    --stone: #2a2018;
+    --amber-dark: #3a2e1e;
+    --amber-mid: #5a4530;
+    --amber: #8a6a3a;
+    --gold: #c4a96b;
+    --parchment: #e8d5b0;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ink);
+    color: #c9b99a;
+    font-family: 'IM Fell English', Georgia, serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Sacred geometry background */
+  .sacred-bg {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 80px 32px 120px;
+  }
+
+  /* Header */
+  .sigil {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 28px;
+    animation: breathe 4s ease-in-out infinite;
+  }
+
+  @keyframes breathe {
+    0%, 100% { opacity: 0.65; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+  }
+
+  .eyebrow {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: #5a4a36;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+
+  h1 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(26px, 5vw, 52px);
+    text-align: center;
+    color: var(--parchment);
+    line-height: 1.2;
+    margin-bottom: 12px;
+    letter-spacing: 0.04em;
+  }
+
+  .subtitle {
+    text-align: center;
+    font-style: italic;
+    font-size: 15px;
+    color: #6a5a44;
+    margin-bottom: 72px;
+    letter-spacing: 0.03em;
+  }
+
+  /* Divider */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 60px;
+  }
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #3a2e1e, transparent);
+  }
+  .divider-glyph {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    color: #3a2e1e;
+  }
+
+  .section-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: #4a3c28;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  /* Cards */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 28px;
+    margin-bottom: 72px;
+  }
+
+  .card {
+    position: relative;
+    background: var(--bark);
+    border: 1px solid var(--vein);
+    border-radius: 2px;
+    padding: 36px 30px 30px;
+    cursor: pointer;
+    transition: border-color 0.4s ease, transform 0.35s ease;
+    overflow: hidden;
+    text-decoration: none;
+    display: block;
+    color: inherit;
+  }
+
+  .card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(160,120,60,0.07) 0%, transparent 65%);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  .card:hover {
+    border-color: var(--amber-mid);
+    transform: translateY(-4px);
+  }
+  .card:hover::after { opacity: 1; }
+
+  /* Corner brackets */
+  .cc {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-color: #2e2418;
+    border-style: solid;
+    transition: border-color 0.4s, opacity 0.4s;
+    opacity: 0.5;
+  }
+  .card:hover .cc { border-color: var(--amber); opacity: 1; }
+  .cc.tl { top: 10px; left: 10px; border-width: 1px 0 0 1px; }
+  .cc.tr { top: 10px; right: 10px; border-width: 1px 1px 0 0; }
+  .cc.bl { bottom: 10px; left: 10px; border-width: 0 0 1px 1px; }
+  .cc.br { bottom: 10px; right: 10px; border-width: 0 1px 1px 0; }
+
+  .card-roman {
+    display: block;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    color: #4a3c2a;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+
+  .card-title {
+    font-family: 'Cinzel', serif;
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 14px;
+    line-height: 1.3;
+    transition: color 0.3s;
+  }
+  .card:hover .card-title { color: var(--parchment); }
+
+  .card-desc {
+    font-style: italic;
+    font-size: 13.5px;
+    color: #5a4c38;
+    line-height: 1.75;
+    margin-bottom: 28px;
+    transition: color 0.3s;
+  }
+  .card:hover .card-desc { color: #7a6a52; }
+
+  .card-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-family: 'Cinzel', serif;
+    font-size: 8.5px;
+    letter-spacing: 0.22em;
+    color: #5a4c36;
+    border: 1px solid #1e1810;
+    padding: 4px 10px;
+    border-radius: 1px;
+    text-transform: uppercase;
+    transition: border-color 0.3s, color 0.3s;
+  }
+  .card:hover .tag { border-color: #2e2418; color: #7a6a4a; }
+
+  .card-arrow {
+    position: absolute;
+    bottom: 28px;
+    right: 28px;
+    font-size: 16px;
+    color: #2e2418;
+    transition: color 0.4s, transform 0.3s;
+  }
+  .card:hover .card-arrow { color: var(--amber); transform: translate(3px, -3px); }
+
+  /* Placeholder card */
+  .card-placeholder {
+    border-style: dashed;
+    border-color: #181410;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 220px;
+    opacity: 0.4;
+    cursor: default;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+  .ph-plus {
+    font-family: 'Cinzel', serif;
+    font-size: 24px;
+    color: #2e2418;
+    margin-bottom: 14px;
+  }
+  .ph-text {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    color: #2e2418;
+    text-transform: uppercase;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding-top: 16px;
+  }
+
+  .footer-quote {
+    font-style: italic;
+    font-size: 14.5px;
+    color: #40322a;
+    line-height: 1.9;
+    position: relative;
+    display: inline-block;
+    max-width: 520px;
+    padding: 0 16px;
+  }
+  .footer-quote::before {
+    content: '\201C';
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 52px;
+    color: #1e1810;
+    position: absolute;
+    top: -18px;
+    left: -8px;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .footer-sig {
+    margin-top: 24px;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    color: #2e2418;
+    text-transform: uppercase;
+  }
+
+  /* Fade-up animation */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-1 { animation: fadeUp 0.7s ease both 0.1s; }
+  .fade-2 { animation: fadeUp 0.7s ease both 0.25s; }
+  .fade-3 { animation: fadeUp 0.7s ease both 0.4s; }
+  .fade-h { animation: fadeUp 0.9s ease both 0s; }
+</style>
+</head>
+<body>
+
+<!-- Sacred geometry background -->
+<svg class="sacred-bg" viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="g1" cx="50%" cy="38%" r="55%">
+      <stop offset="0%" stop-color="#3a2a14" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#0a0806" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1400" height="900" fill="url(#g1)"/>
+  <circle cx="700" cy="430" r="420" fill="none" stroke="#161210" stroke-width="0.6"/>
+  <circle cx="700" cy="430" r="360" fill="none" stroke="#121008" stroke-width="0.4"/>
+  <circle cx="700" cy="430" r="280" fill="none" stroke="#0e0c08" stroke-width="0.4"/>
+  <!-- Hexagram -->
+  <polygon points="700,60 1010,565 390,565" fill="none" stroke="#1a1510" stroke-width="0.5" opacity="0.7"/>
+  <polygon points="700,800 390,295 1010,295" fill="none" stroke="#1a1510" stroke-width="0.5" opacity="0.7"/>
+  <!-- Cross lines -->
+  <line x1="700" y1="10" x2="700" y2="850" stroke="#131008" stroke-width="0.4" opacity="0.6"/>
+  <line x1="280" y1="430" x2="1120" y2="430" stroke="#131008" stroke-width="0.4" opacity="0.6"/>
+  <!-- Diagonals -->
+  <line x1="280" y1="60" x2="1120" y2="800" stroke="#100e0a" stroke-width="0.35" opacity="0.5"/>
+  <line x1="1120" y1="60" x2="280" y2="800" stroke="#100e0a" stroke-width="0.35" opacity="0.5"/>
+  <!-- Center rings -->
+  <circle cx="700" cy="430" r="3" fill="#241c12" opacity="0.8"/>
+  <circle cx="700" cy="430" r="48" fill="none" stroke="#161210" stroke-width="0.4"/>
+  <circle cx="700" cy="430" r="90" fill="none" stroke="#0e0c08" stroke-width="0.3"/>
+</svg>
+
+<div class="container">
+
+  <!-- Sigil -->
+  <div class="sigil fade-h">
+    <svg width="76" height="76" viewBox="0 0 76 76" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="38" cy="38" r="36" fill="none" stroke="#3a2e1e" stroke-width="0.8"/>
+      <circle cx="38" cy="38" r="30" fill="none" stroke="#2a2018" stroke-width="0.5"/>
+      <polygon points="38,10 63,52 13,52" fill="none" stroke="#4a3a24" stroke-width="0.9"/>
+      <polygon points="38,66 13,24 63,24" fill="none" stroke="#4a3a24" stroke-width="0.9"/>
+      <circle cx="38" cy="38" r="5" fill="#6a5030"/>
+      <circle cx="38" cy="38" r="10" fill="none" stroke="#2e2418" stroke-width="0.5"/>
+    </svg>
+  </div>
+
+  <p class="eyebrow fade-h">The Pheonix Codex</p>
+  <h1 class="fade-h">Philosophies of the Self</h1>
+  <p class="subtitle fade-h">Collected thoughts on becoming. A living archive.</p>
+
+  <div class="divider fade-h">
+    <div class="divider-line"></div>
+    <span class="divider-glyph">✦</span>
+    <div class="divider-line"></div>
+  </div>
+
+  <p class="section-label">Scrolls of Thought</p>
+
+  <div class="cards-grid">
+
+    <a class="card fade-1" href="root-and-wing.html">
+      <div class="cc tl"></div><div class="cc tr"></div>
+      <div class="cc bl"></div><div class="cc br"></div>
+      <span class="card-roman">Scroll I</span>
+      <div class="card-title">Root & Wing</div>
+      <p class="card-desc">On the paradox of grounding and freedom — how to be anchored without being caged, and free without being lost.</p>
+      <div class="card-tags">
+        <span class="tag">Identity</span>
+        <span class="tag">Freedom</span>
+        <span class="tag">Parenting</span>
+      </div>
+      <div class="card-arrow">↗</div>
+    </a>
+
+    <a class="card fade-2" href="solution-couple-model.html">
+      <div class="cc tl"></div><div class="cc tr"></div>
+      <div class="cc bl"></div><div class="cc br"></div>
+      <span class="card-roman">Scroll II</span>
+      <div class="card-title">The Solution Couple</div>
+      <p class="card-desc">A theory of relationship as complementary design — two forces completing a single, coherent form.</p>
+      <div class="card-tags">
+        <span class="tag">Relationships</span>
+        <span class="tag">Balance</span>
+        <span class="tag">Union</span>
+      </div>
+      <div class="card-arrow">↗</div>
+    </a>
+
+    <div class="card card-placeholder fade-3">
+      <div class="ph-plus">+</div>
+      <div class="ph-text">More to come</div>
+    </div>
+
+  </div>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <span class="divider-glyph">✦</span>
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="footer">
+    <p class="footer-quote">
+      These are not conclusions. They are compasses — forged in reflection, pointed toward becoming.
+    </p>
+    <p class="footer-sig">Pheonix · A work in perpetual progress</p>
+  </div>
+
+</div>
+</body>
+</html>
